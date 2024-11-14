@@ -1,0 +1,118 @@
+
+#header-background{
+	width:100%;
+	height: 60px;
+	background: url(/public/images/voicetone.jpg)
+
+}
+
+
+h1 {
+	margin-top: 0%;
+	font-size: 100px;
+	font-family: segoe script;
+	color:fuchsia;
+	text-align: center;
+	
+		
+	}
+			
+
+h2 {font-size: 32px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+	text-align: center;
+	color: blue;
+		
+	}
+
+h3 {color:blue
+
+	}
+
+    .img2 { float: right; 
+        max-width: 400px; 
+        margin-left: 20px; 
+        }  
+
+	.img3 { float: left; 
+		max-width: 300px; 
+		margin-left: 20px; 
+		margin-right: 20px;
+		} 
+
+	.img4 { float: center; 
+		max-width: 300px; 
+		margin-left: 150px; 
+		margin-right: 20px;
+		} 
+		
+	.img5 { float: right; 
+			max-width: 300px; 
+			margin-left: 20px; 
+			margin-right: 20px;
+			
+			} 
+
+	.link1 {float: left; 
+		max-width: 300px; 
+		margin-left: 20px; 
+		margin-right: 20px;
+
+	}
+
+	.link2{float: center; 
+		max-width: 300px; 
+		margin-left: 150px; 
+		margin-right: 20px;
+
+	}
+
+	.link3{float: right; 
+		max-width: 300px; 
+		margin-left: 20px; 
+		margin-right: 20px;
+
+	}
+	.vid1 { float: right;
+		max-width: 400px;
+		margin-left: 20px;}
+	
+p {font-size: 25px;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+a {	font-size: 25px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	color: blueviolet
+
+	}
+
+body {background-color: lavender;
+	}
+
+
+	#audiovideo {
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+	}
+	.audio {
+		flex: 1;
+		min-width: 200px; /* Adjust this value based on your needs */
+		margin-left: 250px;
+
+	}
+	
+	
+	.video {
+		flex: 1;
+		min-width: 400px; /* Adjust this value based on your needs */
+		margin: 10px;
+	}
+	iframe {
+		width: 80%;
+		height: 80%;
+		aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+	}
+	
