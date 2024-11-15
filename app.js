@@ -4,6 +4,12 @@ var bcrypt = require('bcrypt');
 var session = require('express-session');
 var conn = require('./dbConfig');
 app.set('view engine','ejs'); 
+
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
 app.use(session({
     secret: 'yoursecret',
     resave: true,
@@ -13,6 +19,7 @@ app.use('/public', express.static('public'));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
 
 // Routes home
 app.get('/', function (req, res){ 
@@ -101,15 +108,21 @@ app.get('/comments', function (req, res){
     res.render("comments");
 })
 
-// Route to post comment
-//app.post('/submit', (req, res) => {
-  //  const { name, email, message } = req.body;
-  //  const sql = 'INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)';
-  //  db.query(sql, [name, email, message], (err, result) => {
-  //      if (err) throw err;
-  //      res.send('Contact information saved!');
-  //  });
-//});
+// Route to post contact message
+
+app.post('/contact', function(req, res,) {
+ console.log (req.body);
+  conn.query(
+      'INSERT INTO contact(name, email, message) VALUES (?, ?, ?)',
+      [req.body.name, req.body.email, req.body.message], 
+            function (error, results, fields) {
+        if (error) throw error;
+        console.log('Message Sent');
+        res.redirect('/');
+      },
+    );
+  });
+
 
 // Route for logout
 app.get('/logout', (req,res) => {
