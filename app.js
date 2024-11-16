@@ -123,6 +123,24 @@ app.post('/contact', function(req, res,) {
     );
   });
 
+// Route to post comment on blog
+
+app.post('/comment', function(req, res,) {
+    console.log (req.body);
+     conn.query(
+         'INSERT INTO comment(name, email, comment) VALUES (?, ?, ?)',
+         [req.body.name, req.body.email, req.body.comment], 
+               function (error, results, fields) {
+           if (error) throw error;
+           console.log('Comment Sent');
+           res.redirect('/blog');
+         },
+       );
+     });
+
+
+
+
 
 // Route for logout
 app.get('/logout', (req,res) => {

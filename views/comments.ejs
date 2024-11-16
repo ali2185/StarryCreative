@@ -26,24 +26,35 @@
   <br>  
 
   <p style="font-size: small; font-style: italic";> Starry welcomes diverse comments and opinions, including those that challenge or disagree with her posts, however comments deemed disrespectful or offensive will be removed.</p>
-    <form action="commentLater.php" method="post" id="commentform">  
-  <br>  
-      <label for="comment_author" class="required">Enter your name:</label>  
-      <input type="text" name="comment_author" id="comment_author" value="" tabindex="1" required="required">  
-    
-      <br>  
-      <label for="comment" class="required">  
-  <br>  
-  Enter your comment</label>  
-  <br>  
-      <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea>  
-  <br>  
-      
-      <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />  
-      <input name="submit" type="submit" value="Submit comment" />  
-    </form>  
-  </div>  
-  <br>
+     
+  <br> 
+  
+  <div class="container">
+		<form action="/comment", method="post">
+	  
+		  <label for="name">Name</label>
+		  <input type="text" name="name" placeholder="name">
+		  <br>
+		  <br>
+	  
+		  <label for="email">Email Address</label>
+		  <input type="text"  name="email" placeholder="email">
+		  <br>
+		  <br>
+	  
+		  
+		  <label for="comment">Comment</label>
+		  <br>
+		  <textarea  name="comment" placeholder="comment" style="height:200px; width: 60%"></textarea>
+
+		  <br>
+	  
+		  <input type="submit" value="Submit">
+	  
+		</form>
+	  </div>
+
+       <br>
 
   <a href="/blog">Back to Blog</a>
 
