@@ -3,6 +3,8 @@ var app = express();
 var bcrypt = require('bcrypt');
 var session = require('express-session');
 var conn = require('./dbConfig');
+var session = require('express-session');
+
 app.set('view engine','ejs'); 
 
 // Middleware
@@ -97,8 +99,10 @@ app.get('/membersOnly', function (req, res, next) {
     else {
         res.send('Please login to view this page!');
     }
+    
+  });
 
-});
+  
 
 app.get('/blog', function (req, res){
     res.render("blog");
@@ -123,6 +127,7 @@ app.post('/contact', function(req, res,) {
     );
   });
 
+  
 // Route to post comment on blog
 
 app.post('/comment', function(req, res,) {
@@ -139,7 +144,19 @@ app.post('/comment', function(req, res,) {
      });
 
 
+     app.get('/admin', function (req, res) {
 
+      // Fetch all the comments from the database
+    
+      conn.query('SELECT * FROM contact', function (error, results, fields) {
+        if (error) throw error;
+        console.log('Comments From database', results);
+        res.render('admin', { commentsData: results });
+      });
+    
+    
+    });  
+    
 
 
 // Route for logout

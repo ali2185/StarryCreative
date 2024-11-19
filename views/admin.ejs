@@ -1,0 +1,40 @@
+
+
+
+<% if (commentsData) { %>
+
+
+    <script>
+        var receivedData = <%- JSON.stringify(commentsData) %>;
+        console.log(receivedData);
+    </script>
+
+    <h2>Contact Starry Messages</h2>
+
+
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Message</th>
+            <th>Email</th>
+        </tr>
+        <% for (var comment of commentsData) { %>
+            <tr>
+                <td><%= comment.name %></td>
+                <td><%= comment.message %></td>
+                <td><%= comment.email %></td>
+                <td><%= comment.date %></td>
+            </tr>
+        <% } %>
+
+        <!-- <p>
+            <%- JSON.stringify(commentsData) %>
+        </p> -->
+
+
+<% } else {%>
+
+    <h2>No messages yet</h2>
+
+<% } %>
