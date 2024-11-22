@@ -56,7 +56,7 @@ app.post('/reg', function (request, response) {
       // ADD TO DATABASE
   
       conn.query(
-        'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+        'INSERT INTO users (name, password) VALUES (?, ?)',
         [request.body.username, hashedPassword],
         function (error, results, fields) {
           if (error) throw error;
