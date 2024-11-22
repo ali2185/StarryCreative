@@ -38,7 +38,7 @@ app.get('/register', function (req, res) {
     res.render('register');
   });
 
-  // Registration Process
+  // Registration Process - TO DO - Troubleshoot why login isn't working for new registered members
 app.post('/reg', function (request, response) {
     console.log('Register Request', request.body);
   
@@ -56,7 +56,7 @@ app.post('/reg', function (request, response) {
       // ADD TO DATABASE
   
       conn.query(
-        'INSERT INTO users (name, password) VALUES (?, ?)',
+        'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
         [request.body.username, hashedPassword],
         function (error, results, fields) {
           if (error) throw error;
