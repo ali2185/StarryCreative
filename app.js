@@ -102,7 +102,12 @@ app.get('/membersOnly', function (req, res, next) {
     
   });
 
-  
+
+  app.get('/vojam', function (req, res){
+    res.render("vojam");
+})
+
+
 
 app.get('/blog', function (req, res){
     res.render("blog");
