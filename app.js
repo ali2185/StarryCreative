@@ -38,7 +38,7 @@ app.get("/register", function (req, res) {
   res.render("register");
 });
 
-// Registration Process
+// Registration Process - TO DO - Troubleshoot why login isn't working for new registered members
 app.post("/reg", function (request, response) {
   console.log("Register Request", request.body);
 
@@ -69,7 +69,6 @@ app.post("/reg", function (request, response) {
 
 // Login Process
 app.post("/auth", function (req, res) {
-  console.log(req.body);
   let name = req.body.username;
   let password = req.body.password;
   if (name && password) {
@@ -78,21 +77,24 @@ app.post("/auth", function (req, res) {
       [name],
       function (error, results, fields) {
         if (error) throw error;
-        console.log(results, results.length);
         if (results.length > 0) {
-          // TODO: Fix this compare -> compareSync
-          // let matchPassword = bcrypt.compareSync(
-          //   password,
-          //   results[0].password 
-          // );
-          // console.log("Password Match", matchPassword,  results[0].password);
-          // if (matchPassword) {
-            req.session.loggedIn = true;
+          var user = results[0];
+      console.log('User', user);
+      // TODO: Fix this compare -> comapreSync
+          var matchPassword = bcrypt.compare(
+            req.body.password,
+            user.password
+                    );
+          console.log(results, matchPassword)
+          if (matchPassword) {
+            req.session.loggedin = true;
             req.session.username = name;
             res.redirect("/membersOnly");
-          } else {
-            res.send("Incorrect Username and/or Password!");
-          // }
+          }else{
+            res.send("Incorrect password!");
+          }
+        } else {
+          res.send("The user name is not found!");
         }
         res.end();
       }
@@ -105,7 +107,7 @@ app.post("/auth", function (req, res) {
 
 //users can access this if they are logged in
 app.get("/membersOnly", function (req, res, next) {
-  if (req.session.loggedIn) {
+  if (req.session.loggedin) {
     res.render("membersOnly");
   } else {
     res.send("Please login to view this page!");
@@ -117,48 +119,52 @@ app.get("/vojam", function (req, res) {
 });
 
 // Process rating submission
-app.post("/submit_ratings", function (req, res) {
+app.post('/submit_ratings', function (req, res) {
   if (!req.session.loggedIn) {
-    res.redirect("/membersOnly");
+    res.redirect('/membersOnly');
     res.end();
   }
 
-  console.log("Rating Submission", req.body);
-  // Who rated the product
-  console.log("User", req.session.username);
+  console.log('Rating Submission', req.body);
+// Who rated the product
+console.log('User', req.session.username);
+
 
   var ratings = [
     {
-      product_id: 1,
-      rating: req.body.rating_product1,
+      'product_id': 1,
+      'rating': req.body.rating_product1,
     },
     {
-      product_id: 2,
-      rating: req.body.rating_product2,
+      'product_id': 2,
+      'rating': req.body.rating_product2,
     },
     {
-      product_id: 3,
-      rating: req.body.rating_product3,
+      'product_id': 3,
+      'rating': req.body.rating_product3,
     },
   ];
-  console.log("Ratings", ratings);
+  console.log('Ratings', ratings);
   // Add to database
 
   for (var i = 0; i < ratings.length; i++) {
     conn.query(
-      "INSERT INTO ratings (product_id, rating) VALUES (?, ?)",
+      'INSERT INTO ratings (product_id, rating) VALUES (?, ?)',
       [ratings[i].product_id, ratings[i].rating],
       function (error, results, fields) {
         if (error) throw error;
-        console.log("Rating added to database");
-      }
+        console.log('Rating added to database');
+      },
     );
   }
 });
 
-app.get("/voteresults", function (req, res) {
+app.get('/voteresults', function (req, res) {
   res.render("voteresults");
 });
+  
+    
+  
 
 app.get("/blog", function (req, res) {
   res.render("blog");
