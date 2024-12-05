@@ -162,7 +162,7 @@ console.log('User', req.session.username);
 app.get('/voteresults', function (req, res) {
   res.render("voteresults");
 });
-  
+ 
     
   
 
