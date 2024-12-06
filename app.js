@@ -80,23 +80,29 @@ app.post("/auth", function (req, res) {
         if (results.length > 0) {
           var user = results[0];
       console.log('User', user);
-      // TODO: Fix this compare -> comapreSync
+      var hashedPassword = bcrypt.hashSync("1234", 10);
+      console.log(hashedPassword);
+      console.log("req.body",req.body.password,user.password)
+      // TODO: Fix this compare -> compareSync
           var matchPassword = bcrypt.compare(
             req.body.password,
             user.password
-                    );
-          console.log(results, matchPassword)
-          if (matchPassword) {
+                    ,
+         (error, result)=>{
+          console.log(results, result)
+          if (result) {
             req.session.loggedin = true;
             req.session.username = name;
             res.redirect("/membersOnly");
           }else{
             res.send("Incorrect password!");
+            res.end();
           }
+          });
         } else {
           res.send("The user name is not found!");
         }
-        res.end();
+        //res.end();
       }
     );
   } else {
@@ -104,6 +110,59 @@ app.post("/auth", function (req, res) {
     res.end();
   }
 });
+
+//app.get('/voteresults', function (req, res) {
+  //res.render("voteresults");
+//});
+
+app.get('/voteresults', function (req, res) {
+   if (!req.session.loggedin) {
+     res.redirect('/login');
+     res.end();
+   }
+   //} else {
+     // Check if the user is an admin
+     // Get the user from the database
+     //conn.query('SELECT * FROM users WHERE username = ?', [req.session.username], function (error, results, fields) {
+       //if (error) throw error;
+       //console.log('User found in database', results);
+ 
+       //if (results.length > 0) {
+         //var user = results[0];
+         //console.log('User', user);
+         //if (user.is_admin) {
+           //console.log('User is admin');
+ 
+           // Fetch all the ratings from the database
+ 
+           conn.query('SELECT * FROM ratings', function (error, results, fields) {
+             if (error) throw error;
+             console.log('Ratings From database', results);
+ 
+             // Create a histogram of the ratings
+ 
+             var histogram = {
+               '1': { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 },
+               '2': { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 },
+               '3': { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 },
+             };
+ 
+             for (var i = 0; i < results.length; i++) {
+               var rating = results[i];
+               histogram[rating.product_id][rating.rating]++;
+             }
+ 
+             console.log('Histogram', histogram);
+ 
+             res.render('voteresults', { ratings: histogram });
+           });
+          
+       }
+     );
+   
+
+
+
 
 //users can access this if they are logged in
 app.get("/membersOnly", function (req, res, next) {
@@ -115,7 +174,11 @@ app.get("/membersOnly", function (req, res, next) {
 });
 
 app.get("/vojam", function (req, res) {
+  if(req.session.loggedin) {
   res.render("vojam");
+} else {
+  res.send("Please login to view this page!");
+}
 });
 
 // Process rating submission
@@ -127,7 +190,7 @@ app.post('/submit_ratings', function (req, res) {
 
   console.log('Rating Submission', req.body);
 // Who rated the product
-console.log('User', req.session.username);
+console.log('User', req.session.name);
 
 
   var ratings = [
@@ -150,7 +213,7 @@ console.log('User', req.session.username);
   for (var i = 0; i < ratings.length; i++) {
     conn.query(
       'INSERT INTO ratings (product_id, rating) VALUES (?, ?)',
-      [ratings[i].product_id, ratings[i].rating],
+      [ratings[i].product_id, ratings[i].rating, req.session.name],
       function (error, results, fields) {
         if (error) throw error;
         console.log('Rating added to database');
@@ -158,12 +221,7 @@ console.log('User', req.session.username);
     );
   }
 });
-
-app.get('/voteresults', function (req, res) {
-  res.render("voteresults");
-});
  
-    
   
 
 app.get("/blog", function (req, res) {
