@@ -80,7 +80,7 @@ app.post("/auth", function (req, res) {
         if (results.length > 0) {
           var user = results[0];
       console.log('User', user);
-      var hashedPassword = bcrypt.hashSync("1234", 10);
+      var hashedPassword = bcrypt.hashSync("1234",10);
       console.log(hashedPassword);
       console.log("req.body",req.body.password,user.password)
       // TODO: Fix this compare -> compareSync
@@ -232,6 +232,10 @@ app.get("/comments", function (req, res) {
   res.render("comments");
 });
 
+app.get("/success", function (req, res) {
+  res.render("success");
+});
+
 // Route to post contact message
 
 app.post("/contact", function (req, res) {
@@ -242,7 +246,7 @@ app.post("/contact", function (req, res) {
     function (error, results, fields) {
       if (error) throw error;
       console.log("Message Sent");
-      res.redirect("/");
+      res.redirect("/success");
     }
   );
 });
@@ -257,7 +261,7 @@ app.post("/comment", function (req, res) {
     function (error, results, fields) {
       if (error) throw error;
       console.log("Comment Sent");
-      res.redirect("/blog");
+      res.redirect("/success");
     }
   );
 });
