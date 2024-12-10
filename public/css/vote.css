@@ -53,25 +53,6 @@ h4 {color:fuchsia
 
     }
 
-
-
-    .graph1 {float: left; 
-		max-width: 250px; 
-		margin-left: 20px; 
-		margin-right: 20px;
-
-	}
-
-	.graph2{float: center; 
-		max-width: 250px; 
-		margin-left: 250px; 
-		margin-right: 20px;
-
-	}
-
-	.graph3{float: right; 
-		max-width: 250px; 
-		margin-left: 20px; 
-		margin-right: 20px;
-
-    }
+    table, th, td {
+        border: 1px solid black;
+      }
