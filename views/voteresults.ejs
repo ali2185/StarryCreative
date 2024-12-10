@@ -1,28 +1,48 @@
+<html>
 <head>
-    <title>Home</title>
+  <meta charset= "utf-8"/>
+  <title> Starry Summer Vote Results </title>
+  <link rel="stylesheet" href="public/css/vote.css">
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
   </head>
   
+  <header id="header background" style="width:100%;
+	height:300px;
+	background: url(/public/images/voicetone.jpg)">
+		<div class="logo">
+		</div>
+	</header>
+  <footer id="footer"> 
+		<p>© 2023 Starry Summer. All rights reserved.</p> 
+	</footer>
 
-  
+
   <body>
-    <h1>See the results - what is most popular?!</h1>
+    <h2>See the results - what is most popular?!</h2>
+    <br>
   
+     <div class="row">
+
+     <div class="column">
+     <h3>Character Acting</h3>
     
-      
-    <h2>Character Acting</h2>
     <div id="my_dataviz_1"></div>
- 
+    </div>
   
-    <h2>Commercial</h2>
-    <div id="my_dataviz_2"></div>
-  
-  
-    <h2>AudioBooks</h2>
-    <div id="my_dataviz_3"></div>
+    <div class="column">
+    <h3>Commercial</h3>
     
+    <div id="my_dataviz_2"></div>
+    </div>
+     
+    <div class="column">
+    <h3>AudioBooks</h3>
+    
+    <div id="my_dataviz_3"></div>
+    </div>
+  </div>
   
     <% if (ratings) { %>
   
@@ -92,6 +112,12 @@
     </script>
   
     <% }else { %> <% } %>
-  
+    <div class="container">
+
+      <p> Insert table in here</p>
+    </div>
+
+
+
   </body>
-  
+  </html>

@@ -1,0 +1,77 @@
+#header-background{
+	width:100%;
+	height: 60px;
+	background: url(/public/images/voicetone.jpg)
+
+}
+
+#footer { 
+	background-color: mediumpurple; 
+	color: #fff; 
+	text-align: center; 
+	position: fixed; 
+	bottom: 0; 
+	width: 100%; 
+} 
+
+h1 {
+	margin-top: 0%;
+	font-size: 100px;
+	font-family: segoe script;
+	color:fuchsia;
+	text-align: center;
+	
+		
+	}
+			
+
+h2 {font-size: 32px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+	text-align: center;
+	color: blue;
+		
+	}
+
+h3 {font-size: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+    color:blue
+
+	}
+
+h4 {color:fuchsia
+
+	}
+
+    .row {
+        display: flex;
+    }
+
+
+    .column {
+        flex: 33.33%;
+        padding: 5px;
+
+    }
+
+
+
+    .graph1 {float: left; 
+		max-width: 250px; 
+		margin-left: 20px; 
+		margin-right: 20px;
+
+	}
+
+	.graph2{float: center; 
+		max-width: 250px; 
+		margin-left: 250px; 
+		margin-right: 20px;
+
+	}
+
+	.graph3{float: right; 
+		max-width: 250px; 
+		margin-left: 20px; 
+		margin-right: 20px;
+
+    }
