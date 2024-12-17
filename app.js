@@ -61,7 +61,7 @@ app.post("/reg", function (request, response) {
       function (error, results, fields) {
         if (error) throw error;
         console.log("User added to database");
-        response.redirect("/login");
+        response.redirect("/success");
       }
     );
   }
