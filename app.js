@@ -267,7 +267,7 @@ app.post("/comment", function (req, res) {
 });
 
 app.get("/admin", function (req, res) {
-  // Fetch all the comments from the database
+  // Fetch all the Contact Messages from the database
 
   conn.query("SELECT * FROM contact", function (error, results, fields) {
     if (error) throw error;
@@ -275,6 +275,8 @@ app.get("/admin", function (req, res) {
     res.render("admin", { commentsData: results });
   });
 });
+
+  
 
 // Route for logout
 app.get("/logout", (req, res) => {
